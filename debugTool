@@ -2,8 +2,8 @@
 <?php
 include __DIR__. '/vendor/autoload.php';
 
-use restdoc\{language\DefaultLanguage, Options, Parser, FindFiles};
-use restdoc\parser\arrayble\{
+use phpdoc\{language\DefaultLanguage, Options, Parser, FindFiles};
+use phpdoc\parser\arrayble\{
     ApiBodyParser,
     ApiDefineParser,
     ApiDeprecatedParser,

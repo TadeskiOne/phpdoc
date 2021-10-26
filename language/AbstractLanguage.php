@@ -1,6 +1,6 @@
 <?php
 
-namespace restdoc\language;
+namespace phpdoc\language;
 
 /**
  * Class AbstractLanguage

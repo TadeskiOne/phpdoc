@@ -1,9 +1,9 @@
 <?php
 
-namespace restdoc\parser\arrayble;
+namespace phpdoc\parser\arrayble;
 
-use restdoc\parser\ApiParserInterface;
-use restdoc\Utils;
+use phpdoc\parser\ApiParserInterface;
+use phpdoc\Utils;
 
 /**
  * Class ApiNameParser

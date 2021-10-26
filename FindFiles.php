@@ -1,14 +1,14 @@
 <?php
 
-namespace restdoc;
+namespace phpdoc;
 
-use restdoc\error\FileException;
+use phpdoc\error\FileException;
 use Throwable;
 use Traversable;
 
 /**
  * Class FindFiles
- * @package restdoc
+ * @package phpdoc
  */
 class FindFiles {
     /**

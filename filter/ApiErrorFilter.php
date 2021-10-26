@@ -1,6 +1,6 @@
 <?php
 
-namespace restdoc\filter;
+namespace phpdoc\filter;
 
 /**
  * Class ApiErrorFilter

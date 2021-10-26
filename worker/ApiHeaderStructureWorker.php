@@ -1,6 +1,6 @@
 <?php
 
-namespace restdoc\worker;
+namespace phpdoc\worker;
 
 /**
  * Class ApiHeaderStructureWorker

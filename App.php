@@ -1,8 +1,8 @@
 <?php
 
-namespace restdoc;
+namespace phpdoc;
 
-use restdoc\error\FileException;
+use phpdoc\error\FileException;
 
 /**
  * Class App

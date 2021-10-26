@@ -1,11 +1,11 @@
 <?php
 
-namespace restdoc\parser\arrayble;
+namespace phpdoc\parser\arrayble;
 
 use Composer\Semver\Semver;
-use restdoc\error\ParameterException;
-use restdoc\parser\ApiParserInterface;
-use restdoc\Utils;
+use phpdoc\error\ParameterException;
+use phpdoc\parser\ApiParserInterface;
+use phpdoc\Utils;
 use UnexpectedValueException;
 
 /**

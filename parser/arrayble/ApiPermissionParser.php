@@ -1,8 +1,8 @@
 <?php
 
-namespace restdoc\parser\arrayble;
+namespace phpdoc\parser\arrayble;
 
-use restdoc\parser\ApiParserInterface;
+use phpdoc\parser\ApiParserInterface;
 
 /**
  * Class ApiPermissionParser

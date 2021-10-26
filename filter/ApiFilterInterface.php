@@ -1,10 +1,10 @@
 <?php
 
-namespace restdoc\filter;
+namespace phpdoc\filter;
 
 /**
  * Interface ApiFilterInterface
- * @package restdoc\filter
+ * @package phpdoc\filter
  */
 interface ApiFilterInterface
 {

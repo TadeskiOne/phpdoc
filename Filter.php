@@ -1,8 +1,8 @@
 <?php
 
-namespace restdoc;
+namespace phpdoc;
 
-use restdoc\filter\ApiFilterInterface;
+use phpdoc\filter\ApiFilterInterface;
 
 /**
  * Class Filter

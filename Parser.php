@@ -1,11 +1,11 @@
 <?php
 
-namespace restdoc;
+namespace phpdoc;
 
-use restdoc\error\ParameterException;
-use restdoc\error\ParserException;
-use restdoc\language\AbstractLanguage;
-use restdoc\parser\ApiParserInterface;
+use phpdoc\error\ParameterException;
+use phpdoc\error\ParserException;
+use phpdoc\language\AbstractLanguage;
+use phpdoc\parser\ApiParserInterface;
 
 /**
  * Class Parser

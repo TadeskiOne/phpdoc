@@ -1,8 +1,8 @@
 <?php
 
-namespace restdoc;
+namespace phpdoc;
 
-use restdoc\worker\ApiWorkerInterface;
+use phpdoc\worker\ApiWorkerInterface;
 
 class Worker
 {

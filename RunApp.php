@@ -1,9 +1,9 @@
 <?php
 
-namespace restdoc;
+namespace phpdoc;
 
-use restdoc\language\DefaultLanguage;
-use restdoc\parser\arrayble\{
+use phpdoc\language\DefaultLanguage;
+use phpdoc\parser\arrayble\{
     ApiBodyParser,
     ApiDefineParser,
     ApiDeprecatedParser,

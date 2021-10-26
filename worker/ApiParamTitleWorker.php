@@ -1,10 +1,10 @@
 <?php
 
-namespace restdoc\worker;
+namespace phpdoc\worker;
 
 use Composer\Semver\Comparator;
-use restdoc\error\WorkerException;
-use restdoc\PackageInfo;
+use phpdoc\error\WorkerException;
+use phpdoc\PackageInfo;
 
 /**
  * Class ApiParamTitleWorker

@@ -1,11 +1,11 @@
 <?php
 
-namespace restdoc\parser\objectable;
+namespace phpdoc\parser\objectable;
 
-use restdoc\error\ParameterException;
-use restdoc\parser\objectable\docElement\AbstractDocElement;
-use restdoc\parser\objectable\docElement\ApiDefine;
-use restdoc\Utils;
+use phpdoc\error\ParameterException;
+use phpdoc\parser\objectable\docElement\AbstractDocElement;
+use phpdoc\parser\objectable\docElement\ApiDefine;
+use phpdoc\Utils;
 
 /**
  * Class ApiDefineParser

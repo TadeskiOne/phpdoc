@@ -1,10 +1,10 @@
 <?php
 
-namespace restdoc\parser\arrayble;
+namespace phpdoc\parser\arrayble;
 
-use restdoc\error\ParameterException;
-use restdoc\parser\ApiParserInterface;
-use restdoc\Utils;
+use phpdoc\error\ParameterException;
+use phpdoc\parser\ApiParserInterface;
+use phpdoc\Utils;
 
 /**
  * Class ApiDefineParser

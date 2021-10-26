@@ -1,12 +1,12 @@
 <?php
 
-namespace restdoc\parser\objectable;
+namespace phpdoc\parser\objectable;
 
-use restdoc\parser\objectable\docElement\AbstractDocElement;
+use phpdoc\parser\objectable\docElement\AbstractDocElement;
 
 /**
  * Class ApiHeaderExampleParser
- * @package restdoc\parser\objectable
+ * @package phpdoc\parser\objectable
  */
 class ApiHeaderExampleParser extends AbstractExampleParser implements ApiParserInterface
 {

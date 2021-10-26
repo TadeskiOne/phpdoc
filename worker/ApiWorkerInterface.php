@@ -1,8 +1,8 @@
 <?php
 
-namespace restdoc\worker;
+namespace phpdoc\worker;
 
-use restdoc\PackageInfo;
+use phpdoc\PackageInfo;
 
 /**
  * Interface WorkerInterface

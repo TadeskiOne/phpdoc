@@ -1,8 +1,8 @@
 <?php
 
-namespace restdoc\parser\objectable;
+namespace phpdoc\parser\objectable;
 
-use restdoc\parser\objectable\docElement\AbstractDocElement;
+use phpdoc\parser\objectable\docElement\AbstractDocElement;
 
 /**
  * Class ApiErrorExampleParser

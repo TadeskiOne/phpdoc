@@ -1,10 +1,10 @@
 <?php
 
-namespace restdoc\parser\objectable;
+namespace phpdoc\parser\objectable;
 
-use restdoc\parser\objectable\docElement\AbstractDocElement;
-use restdoc\parser\objectable\docElement\ApiDescription;
-use restdoc\Utils;
+use phpdoc\parser\objectable\docElement\AbstractDocElement;
+use phpdoc\parser\objectable\docElement\ApiDescription;
+use phpdoc\Utils;
 
 class ApiDescriptionParser implements ApiParserInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace restdoc\error;
+namespace phpdoc\error;
 
 use Throwable;
 

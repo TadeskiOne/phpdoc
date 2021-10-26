@@ -1,8 +1,8 @@
 <?php
 
-namespace restdoc\parser;
+namespace phpdoc\parser;
 
-use restdoc\parser\docElement\AbstractDocElement;
+use phpdoc\parser\docElement\AbstractDocElement;
 
 /**
  * Interface ApiParserInterface
