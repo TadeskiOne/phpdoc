@@ -1,0 +1,72 @@
+#!/usr/bin/env php
+<?php
+include __DIR__. '/vendor/autoload.php';
+
+use restdoc\{language\DefaultLanguage, Options, Parser, FindFiles};
+use restdoc\parser\arrayble\{
+    ApiBodyParser,
+    ApiDefineParser,
+    ApiDeprecatedParser,
+    ApiDescriptionParser,
+    ApiErrorExampleParser,
+    ApiErrorParser,
+    ApiExampleParser,
+    ApiGroupParser,
+    ApiHeaderExampleParser,
+    ApiHeaderParser,
+    ApiNameParser,
+    ApiParamParser,
+    ApiParamExampleParser,
+    ApiParser,
+    ApiPermissionParser,
+    ApiPrivateParser,
+    ApiQueryParser,
+    ApiSampleRequestParser,
+    ApiSuccessExampleParser,
+    ApiSuccessParser,
+    ApiUseParser,
+    ApiVersionParser,
+};
+
+$options = new Options();
+$options->src = __DIR__ . '/test';
+$options->encoding = 'utf8';
+$options->includeFilters = ['/.*\\.(clj|cls|coffee|cpp|cs|dart|erl|exs?|go|groovy|ino?|java|js|jsx|kt|litcoffee|lua|mjs|p|php?|pl|pm|py|rb|scala|ts|vue)$/'];
+
+$parser = new Parser(new FindFiles());
+$parser->addParser('apibody', new ApiBodyParser(new ApiParamParser()));
+$parser->addParser('apidefine', new ApiDefineParser(new ApiParamParser()));
+$parser->addParser('apideprecated', new ApiDeprecatedParser());
+$parser->addParser('apidescription', new ApiDescriptionParser());
+$parser->addParser('apierrorexample', new ApiErrorExampleParser(new ApiExampleParser()));
+$parser->addParser('apierror', new ApiErrorParser(new ApiParamParser()));
+$parser->addParser('apiexample', new ApiExampleParser());
+$parser->addParser('apigroup', new ApiGroupParser());
+$parser->addParser('apiheaderexample', new ApiHeaderExampleParser(new ApiExampleParser()));
+$parser->addParser('apiheader', new ApiHeaderParser(new ApiParamParser()));
+$parser->addParser('apiname', new ApiNameParser());
+$parser->addParser('apiparam', new ApiParamParser());
+$parser->addParser('apiparamexample', new ApiParamExampleParser(new ApiExampleParser()));
+$parser->addParser('api', new ApiParser());
+$parser->addParser('apipermission', new ApiPermissionParser(new ApiUseParser()));
+$parser->addParser('apiprivate', new ApiPrivateParser());
+$parser->addParser('apiquery', new ApiQueryParser(new ApiParamParser()));
+$parser->addParser('apisamplerequest', new ApiSampleRequestParser());
+$parser->addParser('apisuccessexample', new ApiSuccessExampleParser(new ApiExampleParser()));
+$parser->addParser('apisuccess', new ApiSuccessParser(new ApiParamParser()));
+$parser->addParser('apiuse', new ApiUseParser());
+$parser->addParser('apiversion', new ApiVersionParser());
+
+$parser->addLanguage('default', new DefaultLanguage());
+
+$parsedFiles = [];
+$parsedFilenames = [];
+
+$parser->parseFiles($options, $parsedFiles, $parsedFilenames);
+echo PHP_EOL/*, utf8_encode('aaaaaaaaaa\nbbbbbbbb')*/;
+//print_r($parsedFilenames);
+echo PHP_EOL;
+/*print_r($parsedFiles);*/
+file_put_contents(__DIR__.'/phpdoc.json',json_encode($parsedFiles, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+echo PHP_EOL;
+
