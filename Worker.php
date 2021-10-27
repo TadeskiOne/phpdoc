@@ -53,7 +53,10 @@ class Worker
         $preProcessResults = [];
 
         foreach ($this->workers as $worker) {
-            $preProcessResults[] = /*clone*/ $worker->preProcess($parsedFiles, $parsedFilenames, $packageInfos);
+            $preProcessResults = array_merge(
+                $preProcessResults,
+                $worker->preProcess($parsedFiles, $parsedFilenames, $packageInfos)
+            );
         }
 
         foreach ($this->workers as $worker) {

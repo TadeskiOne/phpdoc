@@ -39,22 +39,30 @@ class ApiUseWorker implements ApiWorkerInterface
 
         foreach ($parsedFiles as &$parsedFile) {
             foreach ($parsedFile as &$block) {
-                if ($block['global'][$source]) {
-                    $name = $block['global'][$source]['name'];
+                if (isset($block['global'][$source])) {
+                    $name = (string)trim($block['global'][$source]['name'], " \n");
                     $version = $block['version'] ?? $packageInfos->defaultVersion;
 
-                    if (!$result[$target][$name]) {
+                    if (!isset($result[$target][$name])) {
                         $result[$target][$name] = [];
                     }
 
                     // fetch from local
                     $result[$target][$name][$version] = $block['local'];
                 }
+
+
             }
         }
 
         if ($result[$target] === []) {
             unset($result[$target]);
+        }
+
+        if ($target === 'define') {
+            file_put_contents(
+                __DIR__ . '/apiUse.json', json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
+            );
         }
 
         return $result;
@@ -82,10 +90,16 @@ class ApiUseWorker implements ApiWorkerInterface
     ) {
         $messages = $messages ?: $this->messages;
 
+        if ($source === 'define') {
+            file_put_contents(
+                __DIR__ . '/apiUsePreProc.json', json_encode($preProcess, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
+            );
+        }
+
         foreach ($parsedFiles as $parsedFileIndex => &$parsedFile) {
             foreach ($parsedFile as &$block) {
                 $loopCounter = 0;
-                while ($block['local'][$target]) {
+                while (isset($block['local'][$target])) {
                     if ($loopCounter > 10) {
                         throw new WorkerException(
                             'recursion depth exceeds limit with @apiUse',
@@ -106,10 +120,10 @@ class ApiUseWorker implements ApiWorkerInterface
                     unset($block['local'][$target]);
 
                     foreach ($blockClone as $blockIndex => $definition) {
-                        $name = $definition['name'];
+                        $name = trim($definition['name'], " \n");
                         $version = $block['version'] ?? $packageInfos->defaultVersion;
 
-                        if (!$preProcess[$source] || !$preProcess[$source][$name]) {
+                        if (!isset($preProcess[$source]) || !isset($preProcess[$source][$name])) {
                             throw new WorkerException(
                                 'Referenced groupname does not exist / it is not defined with @apiDefine.',
                                 $filenames[$parsedFileIndex],
@@ -117,12 +131,15 @@ class ApiUseWorker implements ApiWorkerInterface
                                 $messages['common']['element'],
                                 $messages['common']['usage'],
                                 $messages['common']['example'],
-                                [['Groupname' => $block['name']]]
+                                [
+                                    ['Groupname' => $name],
+                                    ['Source' => $source]
+                                ]
                             );
                         }
 
                         $matchedData = [];
-                        if ($preProcess[$source][$name][$version]) {
+                        if (isset($preProcess[$source][$name][$version])) {
                             $matchedData = $preProcess[$source][$name][$version];
                         } else {
                             $foundIndex = -1;

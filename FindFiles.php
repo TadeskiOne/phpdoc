@@ -14,7 +14,7 @@ class FindFiles {
     /**
      * @var string
      */
-    private static $path;
+    private $path;
     /**
      * @var array
      */
@@ -29,16 +29,7 @@ class FindFiles {
      */
     public function setPath(string $newPath): void
     {
-        //print_r(realpath(trim($newPath, '/')));
-        echo PHP_EOL,'++++++++++++++++++++++++++++++++',PHP_EOL;
-        print_r(self::$path);
-        echo PHP_EOL,'++++++++++++++++++++++++++++++++',PHP_EOL;
-        self::$path = $newPath;
-        print_r(self::$path);
-        echo PHP_EOL,'++++++++++++++++++++++++++++++++',PHP_EOL;
-        print_r($newPath);
-
-        echo PHP_EOL,'++++++++++++++++++++++++++++++++',PHP_EOL,PHP_EOL;
+        $this->path = realpath($newPath);
     }
 
     /**
@@ -69,13 +60,8 @@ class FindFiles {
                 function ($entry) {
                     return realpath($entry);
                 },
-                Sync::exec(self::$path)
+                Sync::exec($this->path)
             );
-
-            print_r(Sync::exec(self::$path));
-            print_r(self::$path);
-            echo '===============================',PHP_EOL,PHP_EOL;
-
 
             // create RegExp Include Filter List
             $regExpIncludeFilters = [];
@@ -136,15 +122,15 @@ class FindFiles {
             throw $e;
         } finally {
             if (!$files || $files === []) {
-                throw new FileException('No files found.',self::$path);
+                throw new FileException('No files found.',$this->path);
             }
 
             // remove source path prefix
 
             $files = array_map(
                 function ($filename) {
-                    return substr($filename, 0, strlen(self::$path)) === self::$path
-                        ? substr($filename, strlen(self::$path))
+                    return substr($filename, 0, strlen($this->path)) === $this->path
+                        ? substr($filename, strlen($this->path))
                         : $filename;
                 },
                 $files

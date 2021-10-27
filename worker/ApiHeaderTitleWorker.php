@@ -2,7 +2,7 @@
 
 namespace phpdoc\worker;
 
-use restdoc\PackageInfo;
+use phpdoc\PackageInfo;
 
 class ApiHeaderTitleWorker extends AbstractTitleWorker implements ApiWorkerInterface
 {

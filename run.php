@@ -3,7 +3,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use restdoc\RunApp;
+use phpdoc\RunApp;
 
 
 RunApp::createDoc();

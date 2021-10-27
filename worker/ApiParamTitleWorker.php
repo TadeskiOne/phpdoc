@@ -39,11 +39,11 @@ class ApiParamTitleWorker implements ApiWorkerInterface
 
         foreach ($parsedFiles as &$parsedFile) {
             foreach ($parsedFile as &$block) {
-                if ($block['global'][$source]) {
+                if (isset($block['global'][$source])) {
                     $name = $block['global'][$source]['name'];
                     $version = $block['version'] ?? $packageInfos->defaultVersion;
 
-                    if (!$result[$target][$name]) {
+                    if (!isset($result[$target][$name])) {
                         $result[$target][$name] = [];
                     }
 
@@ -83,7 +83,7 @@ class ApiParamTitleWorker implements ApiWorkerInterface
 
         foreach ($parsedFiles as $parsedFileIndex => &$parsedFile) {
             foreach ($parsedFile as &$block) {
-                if (!$block['local'][$target] || !$block['local'][$target]['fields']) {
+                if (!isset($block['local'][$target]) || !isset($block['local'][$target]['fields'])) {
                     continue;
                 }
 
@@ -94,7 +94,7 @@ class ApiParamTitleWorker implements ApiWorkerInterface
                         $version = $block['version'] ?? $packageInfos->defaultVersion;
                         $matchedData = [];
 
-                        if (!$preProcess[$source] || !$preProcess[$source][$name]) {
+                        if (!isset($preProcess[$source]) || !isset($preProcess[$source][$name])) {
                             // TODO: Enable in the next version
 // At the moment the (groupname) is optional and must not be defined.
                             /*
@@ -150,7 +150,7 @@ class ApiParamTitleWorker implements ApiWorkerInterface
                             $matchedData = $preProcess[$source][$name][$versionName];
                         }
 
-                        if (!$newFields[$matchedData['title']]) {
+                        if (!isset($newFields[$matchedData['title']])) {
                             $newFields[$matchedData['title']] = [];
                         }
 

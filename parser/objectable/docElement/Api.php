@@ -1,6 +1,6 @@
 <?php
 
-namespace restdoc\parser\objectable\docElement;
+namespace phpdoc\parser\objectable\docElement;
 
 /**
  * Class Api

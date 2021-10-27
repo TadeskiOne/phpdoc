@@ -5,7 +5,8 @@ namespace phpdoc;
 /**
  * Class Utils
  */
-class Utils {
+class Utils
+{
     /**
      * @param string $str
      * @return string
@@ -75,8 +76,7 @@ class Utils {
      */
     public static function trim(string $str): string
     {
-        //return preg_replace('/^\s*|\s*$/ui', '', $str);
-        return trim($str, "\s* ");
+        return preg_replace(['/^\s*|\s*$/ui', '/[ \n]$/', '/^[ \n]/'], '', $str);
     }
 
     /**

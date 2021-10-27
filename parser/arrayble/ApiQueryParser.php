@@ -2,7 +2,7 @@
 
 namespace phpdoc\parser\arrayble;
 
-use restdoc\parser\ApiParserInterface;
+use phpdoc\parser\ApiParserInterface;
 
 /**
  * Class ApiQueryParser

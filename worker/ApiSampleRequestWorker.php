@@ -1,8 +1,8 @@
 <?php
 
-namespace restdoc\worker;
+namespace phpdoc\worker;
 
-use restdoc\PackageInfo;
+use phpdoc\PackageInfo;
 
 /**
  * Class ApiSampleRequestWorker
@@ -31,11 +31,11 @@ class ApiSampleRequestWorker implements ApiWorkerInterface
 
         foreach ($parsedFiles as &$parsedFile) {
             foreach ($parsedFile as &$block) {
-                if ($block['local'][$target]) {
+                if (isset($block['local'][$target])) {
                     $newBlock = [];
 
                     foreach ($block['local'][$target] as $entry) {
-                        if ($entry['url'] !== 'off') {
+                        if (isset($entry['url']) && $entry['url'] !== 'off') {
                             // Check if is an internal url
                             if (
                                 $packageInfos->sampleUrl

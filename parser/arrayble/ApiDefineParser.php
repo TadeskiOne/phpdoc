@@ -64,8 +64,8 @@ class ApiDefineParser extends AbstractParamParser implements ApiParserInterface
         $description = implode("\n", $matches);
 
         return [
-            'name' => $name,
-            'title' => $title,
+            'name' => trim($name, " \n"),
+            'title' => trim($title, " \n"),
             'description' => Utils::unindent($description),
         ];
     }

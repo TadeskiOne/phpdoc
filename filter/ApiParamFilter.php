@@ -14,7 +14,7 @@ class ApiParamFilter implements ApiFilterInterface
     {
         foreach ($parsedFiles as &$parsedFile) {
             foreach ($parsedFile as &$block) {
-                if ($block['local'][$tagName] && $block['local'][$tagName]['fields']) {
+                if (isset($block['local'][$tagName]) && isset($block['local'][$tagName]['fields'])) {
                     $blockFields = $block['local'][$tagName]['fields'];
                     foreach (array_keys($blockFields) as $blockFieldKey) {
                         $fields = $block['local'][$tagName]['fields'][$blockFieldKey];
@@ -22,7 +22,7 @@ class ApiParamFilter implements ApiFilterInterface
                         $existingKeys = [];
 
                         foreach ($fields as $field) {
-                            if (!$existingKeys[$field['field']]) {
+                            if (!isset($existingKeys[$field['field']])) {
                                 $existingKeys[$field['field']] = 1;
                                 $newFields[] = $field;
                             }

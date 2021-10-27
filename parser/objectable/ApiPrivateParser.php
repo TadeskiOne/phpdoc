@@ -1,9 +1,9 @@
 <?php
 
-namespace restdoc\parser\objectable;
+namespace phpdoc\parser\objectable;
 
-use restdoc\parser\objectable\docElement\AbstractDocElement;
-use restdoc\parser\objectable\docElement\ApiPrivate;
+use phpdoc\parser\objectable\docElement\AbstractDocElement;
+use phpdoc\parser\objectable\docElement\ApiPrivate;
 
 /**
  * Class ApiPrivateParser

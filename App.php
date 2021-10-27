@@ -34,13 +34,13 @@ class App
                     // Keep same options for each folder, but ensure the 'src' of options
                     // is the folder currently being processed.
                     $folderOptions = $options;
-                    $folderOptions->src = trim($folder, '/') . '/';
+                    $folderOptions->src = rtrim($folder, '/') . '/';
 
                     $this->settings->parser->parseFiles($folderOptions, $parsedFiles, $parsedFilenames);
                 }
             } else {
                 // if the input option for source is a single folder, parse as usual.
-                $options->src = trim($options->src, '/') . '/';
+                $options->src = rtrim($options->src, '/') . '/';
 
                 $this->settings->parser->parseFiles($options, $parsedFiles, $parsedFilenames);
             }
@@ -53,14 +53,14 @@ class App
             $this->settings->worker->process($parsedFiles, $parsedFilenames, $this->packageInfo);
 
             // cleanup
-            $blocks = $this->settings->filter->process($parsedFiles, $parsedFilenames);
+            $blocks = array_values($this->settings->filter->process($parsedFiles, $parsedFilenames));
 
             // sort by group ASC, name ASC, version DESC
             uasort(
                 $blocks,
                 function ($a, $b) {
-                    $nameA = $a['group'] . $a['name'];
-                    $nameB = $b['group'] . $b['name'];
+                    $nameA = $a['group'] . ($a['name'] ?? '');
+                    $nameB = $b['group'] . ($b['name'] ?? '');
 
                     if ($nameA === $nameB) {
                         if ($a['version'] === $b['version']) {
@@ -73,6 +73,7 @@ class App
                     return ($nameA < $nameB) ? -1 : 1;
                 }
             );
+            $blocks = array_values($blocks);
 
             // add apiDoc specification version
             $this->packageInfo->apidoc = self::SPECIFICATION_VERSION;
@@ -81,12 +82,12 @@ class App
             //app.packageInfos.generator = app.generator;
 
             // api_data
-            $apiData = json_encode($blocks);
-            $apiData = preg_replace("/(\r\n|\n|\r)/ium", $this->settings->options->lineEnding, $apiData);
+            $apiData = json_encode($blocks, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+            //$apiData = preg_replace("/(\r\n|\n|\r)/ium", $this->settings->options->lineEnding, $apiData);
 
             // api_project
-            $apiProject = json_encode($this->packageInfo);
-            $apiProject = preg_replace("/(\r\n|\n|\r)/ium", $this->settings->options->lineEnding, $apiProject);
+            $apiProject = json_encode($this->packageInfo, JSON_UNESCAPED_UNICODE);
+            //$apiProject = preg_replace("/(\r\n|\n|\r)/ium", $this->settings->options->lineEnding, $apiProject);
 
             return [
                 'data' => $apiData,

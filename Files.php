@@ -54,7 +54,7 @@ class Files implements Iterator
      */
     public function __construct(string $dir, int $depthLimit = self::DEFAULT_DEPTH_LIMIT)
     {
-        $this->dir = trim($dir, '/');
+        $this->dir = rtrim($dir, '/');
         $this->realPathDir = realpath($this->dir);
         $this->files = iterator_to_array($this->scanDir($this->realPathDir));
         if (!$this->files || count($this->files) === 0) {

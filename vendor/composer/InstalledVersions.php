@@ -25,13 +25,13 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
-    'name' => 'tadeskione/restdoc',
+    'reference' => '304ef4570af96fd698a4f5c90960f3e870b40637',
+    'name' => 'tadeskione/phpdoc',
   ),
   'versions' => 
   array (
@@ -44,14 +44,14 @@ private static $installed = array (
       ),
       'reference' => '31f3ea725711245195f62e54ffa402d8ef2fdba9',
     ),
-    'tadeskione/restdoc' => 
+    'tadeskione/phpdoc' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '304ef4570af96fd698a4f5c90960f3e870b40637',
     ),
   ),
 );

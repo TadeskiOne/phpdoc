@@ -63,20 +63,15 @@ class Parser
 
     public function parseFiles(Options $options, array &$parsedFiles = [], array &$parsedFilenames = [])
     {
-        echo PHP_EOL, $options->src, PHP_EOL, PHP_EOL;
-       // $ffin = clone $this->findFiles;
         $this->findFiles->setExcludeFilters($options->excludeFilters);
         $this->findFiles->setIncludeFilters($options->includeFilters);
         $this->findFiles->setPath($options->src);
-        //$ffin->setPath($options);
-
 
         $files = $this->findFiles->search();
 
-        //print_r($files);
         // Parser
-        foreach ($files as $filename) {
-            //$filename = $options->src . $file;
+        foreach ($files as $file) {
+            $filename = rtrim($options->src, '/'). '/' . trim($file, '/');
             $parsedFile = $this->parseFile($filename, $options->encoding);
 
             if ($parsedFile) {
@@ -154,14 +149,12 @@ class Parser
             $countAllowedMultiple = 0;
 
             /** @var Element $element */
-            //print_r($elements);
             foreach ($elements as $element) {
                 /** @var ApiParserInterface $elementParser */
                 $elementParser = $this->parsers[$element->name] ?? null;
 
                 if (!$elementParser) {
                     //TODO add warning
-                    print_r($element);
                 } else {
                     if ($elementParser->isDeprecated()) {
                         $this->countDeprecated[$element->sourceName] = $this->countDeprecated[$element->sourceName]
@@ -223,12 +216,6 @@ class Parser
 
                         // TODO: put this into "converters"
                         if ($values) {
-                            /*echo PHP_EOL , '===============================';
-                            echo PHP_EOL , '$values', PHP_EOL;
-                            echo PHP_EOL , $element->content, PHP_EOL;
-                            print_r($values);
-                            echo PHP_EOL , '===============================', PHP_EOL;*/
-
                             // Markdown.
                         } else {
                             throw new ParserException(
@@ -248,7 +235,6 @@ class Parser
                         if ($e->example) {
                             $extra[] = ['Example' => $e->example];
                         }
-                       // print_r($e);
                         throw new ParserException(
                             $e->getMessage(),
                             $this->filename,
@@ -319,18 +305,10 @@ class Parser
                         }
                     }
 
-                    //print_r($blockData);
                     if (!ArrayHelper::getValue($blockData, $pathTo)) {
                         ArrayHelper::setValue($blockData, $pathTo, []);
                         //$this->createObjectPath($blockData, $pathTo, $attachMethod);
                     }
-
-                    /*echo $pathTo.PHP_EOL;
-                    $blockDataPath = $this->pathToObject($blockData, $pathTo);
-                    print_r($blockDataPath);
-                    echo PHP_EOL;
-                    print_r($attachMethod);
-                    echo PHP_EOL;*/
 
                     // insert Fieldvalues in Path-Array
                     if ($attachMethod === 'push') {

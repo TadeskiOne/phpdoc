@@ -16,10 +16,8 @@ class Sync
      * @return array
      */
     public static function exec(string $dir, array $opts = ['depthLimit' => 100], array &$ls = []) {
-        //echo '=============================',PHP_EOL, $dir, PHP_EOL,'=============================',PHP_EOL;
         if (!$ls) {
             $dir = realpath($dir);
-            //echo '+++++++++++++++++++++++++++++',PHP_EOL, $dir, PHP_EOL,'+++++++++++++++++++++++++++++',PHP_EOL;
             $opts = $opts ?? [];
             $opts['fs'] = $opts['fs'] ?? [];
 

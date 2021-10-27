@@ -34,17 +34,16 @@ class WorkerException extends \Exception implements ErrorInterface
         $message .= self::DELIMITER . "Block: \t" . $block;
         $message .= self::DELIMITER . "Element: \t@" . $element;
         $message .= self::DELIMITER . "Definition: \t" . $definition;
-        $message .= self::DELIMITER . "Example: \t" . $example;
-        $message .= self::DELIMITER . "Extra: \t" . (
+        $message .= self::DELIMITER . "Example: \t" . str_replace("\n", self::DELIMITER . "\t\t", $example);
+        $message .= self::DELIMITER . "Extra: " . self::DELIMITER . "\t" . (
             $extra
             ? implode(
-            self::DELIMITER . "\t",
+                self::DELIMITER . "\t",
                 array_map(
-                    function ($val, $key) {
-                        return $key . ': ' . $val;
+                    function ($val) {
+                        return str_replace("\n", '',key($val) . ': ' .  current($val));
                     },
                     $extra,
-                    array_keys($extra)
                 )
             )
             : ''

@@ -38,11 +38,11 @@ class ApiPermissionWorker implements ApiWorkerInterface
 
         foreach ($parsedFiles as &$parsedFile) {
             foreach ($parsedFile as &$block) {
-                if ($block['global'][$source]) {
+                if (isset($block['global'][$source])) {
                     $name = $block['global'][$source]['name'];
                     $version = $block['version'] ?? $packageInfos->defaultVersion;
 
-                    if (!$result[$target][$name]) {
+                    if (!isset($result[$target][$name])) {
                         !$result[$target][$name] = [];
                     }
 
@@ -68,8 +68,8 @@ class ApiPermissionWorker implements ApiWorkerInterface
         array $filenames,
         array $preProcess,
         PackageInfo $packageInfos,
-        string $source = 'defineGroup',
-        string $target = 'group',
+        string $source = 'definePermission',
+        string $target = 'permission',
         array $messages = []
     ) {
 
@@ -77,7 +77,7 @@ class ApiPermissionWorker implements ApiWorkerInterface
 
         foreach ($parsedFiles as $parsedFileIndex => &$parsedFile) {
             foreach ($parsedFile as &$block) {
-                if (!$block['local'][$target]) {
+                if (!isset($block['local'][$target])) {
                     continue;
                 }
 
@@ -87,7 +87,7 @@ class ApiPermissionWorker implements ApiWorkerInterface
                     $version = $block['version'] ?? $packageInfos->defaultVersion;
                     $matchedData = [];
 
-                    if (!$preProcess[$source] || !$preProcess[$source][$name]) {
+                    if (!isset($preProcess[$source]) || !isset($preProcess[$source][$name])) {
                         // TODO: Enable in the next version
                         // At the moment the (groupname) is optional and must not be defined.
                         /*
@@ -103,9 +103,10 @@ class ApiPermissionWorker implements ApiWorkerInterface
                                                   extra);
                         */
                         // TODO: Remove in the next version
+
                         $matchedData['name'] = $name;
-                        $matchedData['title'] = $definition['title'];
-                        $matchedData['description'] = $definition['description'];
+                        $matchedData['title'] = '';
+                        $matchedData['description'] = '';
                     } elseif ($preProcess[$source][$name][$version]) {
                         $matchedData = $preProcess[$source][$name][$version];
                     } else {
