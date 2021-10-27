@@ -13,7 +13,7 @@ class ApiSampleRequestWorker implements ApiWorkerInterface
     /**
      * @inheritDoc
      */
-    public function preProcess(array &$parsedFiles, array $filenames, PackageInfo $packageInfos): array
+    public function preProcess(array $parsedFiles, array $filenames, PackageInfo $packageInfos): array
     {
         return [];
     }
@@ -22,7 +22,7 @@ class ApiSampleRequestWorker implements ApiWorkerInterface
      * @inheritDoc
      */
     public function postProcess(
-        array $parsedFiles,
+        array &$parsedFiles,
         array $filenames,
         array $preProcess,
         PackageInfo $packageInfos

@@ -276,7 +276,7 @@ class ApiGroupWorker implements ApiWorkerInterface
      * @inheritDoc
      */
     public function preProcess(
-        array &$parsedFiles,
+        array $parsedFiles,
         array $filenames,
         PackageInfo $packageInfos,
         string $target = 'defineGroup'
@@ -288,8 +288,8 @@ class ApiGroupWorker implements ApiWorkerInterface
 
         foreach ($parsedFiles as &$parsedFile) {
             foreach ($parsedFile as &$block) {
-                if (isset($block['global']['source'])) {
-                    $name = $block['global']['source']['name'];
+                if (isset($block['global'][$source])) {
+                    $name = $block['global'][$source]['name'];
                     $version = $block['version'] ?? $packageInfos->defaultVersion;
 
                     if (!isset($result[$target][$name])) {
@@ -307,6 +307,12 @@ class ApiGroupWorker implements ApiWorkerInterface
             unset($result[$target]);
         }
 
+
+            file_put_contents(
+                __DIR__ . '/defineGroup.json', json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
+            );
+
+
         return $result;
     }
 
@@ -314,7 +320,7 @@ class ApiGroupWorker implements ApiWorkerInterface
      * @inheritDoc
      */
     public function postProcess(
-        array $parsedFiles,
+        array &$parsedFiles,
         array $filenames,
         array $preProcess,
         PackageInfo $packageInfos,
@@ -375,7 +381,7 @@ class ApiGroupWorker implements ApiWorkerInterface
                     // TODO: Remove in the next version
                     $matchedData['title'] = $name;
                     $matchedData['description'] = null;
-                } elseif ($preProcess[$source][$name][$version]) {
+                } elseif (isset($preProcess[$source][$name][$version])) {
                     $matchedData = $preProcess[$source][$name][$version];
                 } else {
                     $foundIndex = -1;

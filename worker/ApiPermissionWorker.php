@@ -26,7 +26,7 @@ class ApiPermissionWorker implements ApiWorkerInterface
      * @inheritDoc
      */
     public function preProcess(
-        array &$parsedFiles,
+        array $parsedFiles,
         array $filenames,
         PackageInfo $packageInfos,
         string $target = 'definePermission'
@@ -64,7 +64,7 @@ class ApiPermissionWorker implements ApiWorkerInterface
      * @inheritDoc
      */
     public function postProcess(
-        array $parsedFiles,
+        array &$parsedFiles,
         array $filenames,
         array $preProcess,
         PackageInfo $packageInfos,

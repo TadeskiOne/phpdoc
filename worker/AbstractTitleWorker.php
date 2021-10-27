@@ -44,7 +44,7 @@ abstract class AbstractTitleWorker implements ApiWorkerInterface
      * @return array
      */
     public function preProcess(
-        array &$parsedFiles,
+        array $parsedFiles,
         array $filenames,
         PackageInfo $packageInfos
     ): array {
@@ -59,7 +59,7 @@ abstract class AbstractTitleWorker implements ApiWorkerInterface
      * @throws WorkerException
      */
     public function postProcess(
-        array $parsedFiles,
+        array &$parsedFiles,
         array $filenames,
         array $preProcess,
         PackageInfo $packageInfos

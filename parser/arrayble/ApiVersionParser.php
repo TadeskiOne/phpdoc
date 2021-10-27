@@ -20,7 +20,7 @@ class ApiVersionParser implements ApiParserInterface
      */
     public function parse(string $content, string $source): ?array
     {
-        $version = trim(Utils::trim($content), "\n");
+        $version = trim(Utils::trim($content), " \n");
 
         if ($version === '') {
             return null;

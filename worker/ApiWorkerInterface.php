@@ -18,7 +18,7 @@ interface ApiWorkerInterface
      * @returns array
      */
     public function preProcess(
-        array &$parsedFiles,
+        array $parsedFiles,
         array $filenames,
         PackageInfo $packageInfos
     ): array;
@@ -32,7 +32,7 @@ interface ApiWorkerInterface
      * @param PackageInfo $packageInfos
      */
     public function postProcess(
-        array $parsedFiles,
+        array &$parsedFiles,
         array $filenames,
         array $preProcess,
         PackageInfo $packageInfos

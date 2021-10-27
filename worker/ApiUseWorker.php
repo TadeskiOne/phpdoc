@@ -27,7 +27,7 @@ class ApiUseWorker implements ApiWorkerInterface
      * @return array|array[]
      */
     public function preProcess(
-        array &$parsedFiles,
+        array $parsedFiles,
         array $filenames,
         PackageInfo $packageInfos,
         string $target = 'define'
@@ -59,12 +59,6 @@ class ApiUseWorker implements ApiWorkerInterface
             unset($result[$target]);
         }
 
-        if ($target === 'define') {
-            file_put_contents(
-                __DIR__ . '/apiUse.json', json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
-            );
-        }
-
         return $result;
     }
 
@@ -80,7 +74,7 @@ class ApiUseWorker implements ApiWorkerInterface
      * @param string[][] $messages
      */
     public function postProcess(
-        array $parsedFiles,
+        array &$parsedFiles,
         array $filenames,
         array $preProcess,
         PackageInfo $packageInfos,
@@ -114,6 +108,9 @@ class ApiUseWorker implements ApiWorkerInterface
 
                     //create a copy of the elements for save iterating of the elements
                     $blockClone = array_slice($block['local'][$target], 0);
+                   /* if ($source=='define' && $target == 'use') {
+                        print_r($blockClone);
+                    }*/
 
                     // remove unneeded target before starting the loop, to allow a save insertion of new elements
                     // TODO: create a cleanup filter
@@ -176,9 +173,11 @@ class ApiUseWorker implements ApiWorkerInterface
                             $versionName = $versionKeys[$foundIndex];
                             $matchedData = $preProcess[$source][$name][$versionName];
                         }
+
                         // copy matched elements into parsed block
-                        $block['local'] = array_merge_recursive($block['local'], $matchedData);
+                        $block['local'] = array_merge($block['local'], $matchedData);
                     }
+                    $loopCounter++;
                 }
             }
         }

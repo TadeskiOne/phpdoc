@@ -265,7 +265,7 @@ class ApiNameWorker implements ApiWorkerInterface
     /**
      * @inheritDoc
      */
-    public function preProcess(array &$parsedFiles, array $filenames, PackageInfo $packageInfos): array
+    public function preProcess(array $parsedFiles, array $filenames, PackageInfo $packageInfos): array
     {
         return [];
     }
@@ -276,8 +276,12 @@ class ApiNameWorker implements ApiWorkerInterface
      * @param array $preProcess
      * @param PackageInfo|null $packageInfos
      */
-    public function postProcess(array $parsedFiles, array $filenames = [], array $preProcess = [], PackageInfo $packageInfos =null)
-    {
+    public function postProcess(
+        array &$parsedFiles,
+        array $filenames = [],
+        array $preProcess = [],
+        PackageInfo $packageInfos = null
+    ) {
         $target = 'name';
 
         foreach ($parsedFiles as &$parsedFile) {

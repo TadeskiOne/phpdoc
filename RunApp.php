@@ -73,6 +73,8 @@ class RunApp
             $app = new App($appSettings, new PackageInfo());
 
             $api = $app->parse($options);
+
+            //exit;
             if ($api === true) {
                 //app.log.info('Nothing to do.');
                 echo 'Nothing to do.', PHP_EOL;

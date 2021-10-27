@@ -24,8 +24,8 @@ class Worker
     {
         // some smaller operation that are not outsourced to extra workers
         // TODO: add priority system first and outsource them then
-        foreach ($parsedFiles as $fileIndex => $parsedFile) {
-            foreach ($parsedFile as $block) {
+        foreach ($parsedFiles as $fileIndex => &$parsedFile) {
+            foreach ($parsedFile as &$block) {
                 if ($block['global'] === [] && count($block['local']) > 0) {
                     if (!isset($block['local']['type'])) {
                         $block['local']['type'] = '';

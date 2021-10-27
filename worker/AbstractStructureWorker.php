@@ -8,7 +8,7 @@ use phpdoc\PackageInfo;
 /**
  * Class AbstractStructureWorker
  */
-abstract class AbstractStructureWorker
+abstract class AbstractStructureWorker implements ApiWorkerInterface
 {
     /**
      * @var array
@@ -44,7 +44,7 @@ abstract class AbstractStructureWorker
      * @return array
      */
     public function preProcess(
-        array &$parsedFiles,
+        array $parsedFiles,
         array $filenames,
         PackageInfo $packageInfos
     ): array {
@@ -59,7 +59,7 @@ abstract class AbstractStructureWorker
      * @throws WorkerException
      */
     public function postProcess(
-        array $parsedFiles,
+        array &$parsedFiles,
         array $filenames,
         array $preProcess,
         PackageInfo $packageInfos

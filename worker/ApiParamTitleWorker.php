@@ -27,7 +27,7 @@ class ApiParamTitleWorker implements ApiWorkerInterface
      * @return array|array[]
      */
     public function preProcess(
-        array &$parsedFiles,
+        array $parsedFiles,
         array $filenames,
         PackageInfo $packageInfos,
         string $target = 'defineParamTitle'
@@ -71,7 +71,7 @@ class ApiParamTitleWorker implements ApiWorkerInterface
      * @param string[][]      $messages
      */
     public function postProcess(
-        array $parsedFiles,
+        array &$parsedFiles,
         array $filenames,
         array $preProcess,
         PackageInfo $packageInfos,
